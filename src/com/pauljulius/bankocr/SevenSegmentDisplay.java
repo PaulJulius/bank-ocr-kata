@@ -5,7 +5,9 @@ import java.util.Collection;
 
 /**
  * Converts a text pattern into an object that represents the Segments of a number on an old fashioned
- * digital display, like an old calculator. See the Wikipedia article for an in-depth analysis.
+ * digital display, like an old calculator, or as read by the Bank OCR application.
+ * 
+ * See the Wikipedia article for an in-depth analysis.
  * 
  * http://en.wikipedia.org/wiki/Seven-segment_display
  */

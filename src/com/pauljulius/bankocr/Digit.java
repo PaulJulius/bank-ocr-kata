@@ -5,7 +5,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
+/**
+ * A single digit like those found in an AccountNumber instance. A digit might be a valid number, 0 through 9,
+ * or could represent an illegible digit, as is the case when one segment is missing from an otherwise valid
+ * SevenSegmentDisplay. Digits know how to offer alternatives for what it could be if only one segment was
+ * changed in its SevenSegmentDisplay representation.
+ * 
+ */
 public class Digit {
 
 	public static final Digit ZERO  = 

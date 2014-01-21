@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Helper for parse a list of Strings, like those read from an input file into
+ * a List of AccountNumber instances.
+ */
 public class AllAccountsText {
 
     public static List<AccountNumber> parseAccounts(List<String> lines) {

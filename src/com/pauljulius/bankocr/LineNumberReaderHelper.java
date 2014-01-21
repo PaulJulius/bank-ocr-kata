@@ -5,6 +5,10 @@ import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Helper for reading all the lines from a LineNumberReader.
+ * 
+ */
 public class LineNumberReaderHelper {
 
 	public static List<String> readAll(LineNumberReader reader) throws IOException {

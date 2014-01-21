@@ -5,7 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * Represents an Account Number like those read by the Bank OCR system. An account number is a series of digits.
+ * Contains some useful methods for determining if the account number passes the checksum and possible permutations
+ * that would be valid.
+ * 
+ */
 public class AccountNumber {
 
 	private final List<Digit> digits;

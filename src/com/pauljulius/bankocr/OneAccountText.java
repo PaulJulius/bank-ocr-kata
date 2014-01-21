@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 /**
  * Converts a text based digital representation of an account number, like those read by the Bank OCR, and
- * converts them into Account Number instances.
+ * converts them into AccountNumber instances.
  * 
  */
 public class OneAccountText {
