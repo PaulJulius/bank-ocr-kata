@@ -1,8 +1,5 @@
-bank-ocr-kata
-=============
-
-My solution(s) for the Bank OCR Kata at http://codingdojo.org/cgi-bin/wiki.pl?KataBankOCR
-
+An implementation of the BankOCR kata.
+http://codingdojo.org/cgi-bin/wiki.pl?KataBankOCR
 
 Problem Description
 
