@@ -1,0 +1,22 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+task validate {
+        if (!System.getProperty('java.version').contains('1.8')) {
+                ant.fail( "ERROR Java 1.8 required! (found Java ${System.getProperty('java.version')})")
+        }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = "1.12-20140120230652+0000"
+}
