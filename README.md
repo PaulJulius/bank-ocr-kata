@@ -3,6 +3,15 @@ bank-ocr-kata
 
 My solution(s) for the Bank OCR Kata at http://codingdojo.org/cgi-bin/wiki.pl?KataBankOCR
 
+This project requires Java 1.8. It uses some of the new features, like Lambdas.
+https://jdk8.java.net/download.html
+
+Once you have a 1.8 JDK, you can run the build for this project by running the gradle wrapper (no need to install Gradle manually).
+    > ./gradlew build
+or
+    > gradlew.bat build
+
+
 
 Problem Description
 

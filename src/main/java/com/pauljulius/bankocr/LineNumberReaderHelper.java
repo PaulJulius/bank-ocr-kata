@@ -12,21 +12,25 @@ import java.util.List;
 public class LineNumberReaderHelper {
 
 	public static List<String> readAll(LineNumberReader reader) throws IOException {
-		List<String> all = new ArrayList<String>();
-		String nextLine = reader.readLine(); 
-		while(nextLine != null) {
-			validateLineLength(reader, nextLine);
-				
-			all.add(nextLine);
-			nextLine = reader.readLine();
-		}
-		
-		return all;
+		return readAll(reader, 27);
 	}
+	
+	public static List<String> readAll(LineNumberReader reader, int lineLength) throws IOException {
+        List<String> all = new ArrayList<String>();
+        String nextLine = reader.readLine(); 
+        while(nextLine != null) {
+            validateLineLength(reader, nextLine, lineLength);
+                
+            all.add(nextLine);
+            nextLine = reader.readLine();
+        }
+        
+        return all;
+    }
 
-	private static void validateLineLength(LineNumberReader reader, String nextLine) {
-		if (nextLine.length() < 27) {
-			throw new IllegalArgumentException("Line number " + reader.getLineNumber() + " contains only " + nextLine.length() + " characters, but it should contain 27.");
+	private static void validateLineLength(LineNumberReader reader, String nextLine, int lineLength) {
+		if (nextLine.length() < lineLength) {
+			throw new IllegalArgumentException("Line number " + reader.getLineNumber() + " contains only " + nextLine.length() + " characters, but it should contain " + lineLength + ".");
 		}
 	}
 }

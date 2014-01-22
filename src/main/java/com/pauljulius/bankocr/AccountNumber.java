@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 public class AccountNumber {
 
 	private final List<Digit> digits;
+    private List<AccountNumber> valids;
 
 	public AccountNumber(String numbers) {
 	    digits = 
@@ -56,7 +57,9 @@ public class AccountNumber {
 	}
 
 	public List<AccountNumber> validPermutations() {
-	    List<AccountNumber> valids = new ArrayList<>();
+	    if (valids != null) return valids;
+	    
+	    valids = new ArrayList<>();
 	    
 	    //for every digit
 	    int index = 0;
@@ -91,4 +94,25 @@ public class AccountNumber {
         }
         return true;
     }
+
+    public boolean isAmbiguous() {
+        return !isValid() && validPermutations().size() > 1;
+    }
+
+    public boolean hasOneOtherSolution() {
+        return !isValid() && validPermutations().size() == 1;
+    }
+
+    public boolean isIllegible() {
+        return !isValid() && containsIllegible();
+    }
+
+    public boolean isInError() {
+        return !isValid() && !containsIllegible() && validPermutations().size() == 0;
+    }
+
+    public AccountNumber firstPermutation() {
+        return validPermutations().get(0);
+    }
 }
+
