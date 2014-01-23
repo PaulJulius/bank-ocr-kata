@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * The main class for the Bank OCR application. It offers a command line that accepts an input file, processes all the
- * account numbers, and optionally writes them to an output file.
+ * account numbers, and optionally writes out the account numbers read to System.out.
  */
 public class BankOCR {
 
@@ -21,35 +21,35 @@ public class BankOCR {
                     "   " +
                     "  |" +
                     "  |";
-    private static final String TWO =
+    static final String TWO =
                     " _ " +
                     " _|" +
                     "|_ ";
-    private static final String THREE = 
+    static final String THREE = 
                     " _ " +
                     " _|" +
                     " _|";
-    private static final String FOUR =
+    static final String FOUR =
                     "   " +
                     "|_|" +
                     "  |";
-    private static final String FIVE = 
+    static final String FIVE = 
                     " _ " +
                     "|_ " +
                     " _|";
-    private static final String SIX = 
+    static final String SIX = 
                     " _ " +
                     "|_ " +
                     "|_|";
-    private static final String SEVEN =
+    static final String SEVEN =
                     " _ " +
                     "  |" +
                     "  |";
-    private static final String EIGHT = 
+    static final String EIGHT = 
                     " _ " +
                     "|_|" +
                     "|_|";
-    private static final String NINE = 
+    static final String NINE = 
                     " _ " +
                     "|_|" +
                     " _|";
@@ -62,10 +62,8 @@ public class BankOCR {
         //While 4 lines available
         List<String> lines = null;
         while ((lines = readFourLines(reader)) != null) {
-            //Convert to account number
-            String nextAccountNumber = convert(lines);
-            //Write out account number
-            printWriter.println(nextAccountNumber);
+            //Convert to account number & write it out
+            printWriter.println(parseAccount(lines));
         }
     }
 
@@ -81,23 +79,24 @@ public class BankOCR {
         return lines;
     }
 
-    public static String convert(List<String> lines) {
-        String account = "";
+    public static String parseAccount(List<String> lines) {
+        StringBuffer account = new StringBuffer();
         //while the lines have more display digits to read
-        while(lines.get(0).length() > 0) {
+        while(hasMoreDisplayDigits(lines)) {
             //pull off the next display digit
-            String displayDigit = nextDisplayDigit(lines);
-            //convert it to a number
-            int num = intFor(displayDigit);
-            //append it to the full account number
-            account += num;
-            
+            //convert it to a number & append it to the full account number
+            account.append(toInt(nextDisplayDigit(lines)));
         }
-        return account;
+        return account.toString();
+    }
+
+    private static boolean hasMoreDisplayDigits(List<String> lines) {
+        return lines.get(0).length() > 0;
     }
 
     /**
-     * Has the side effect of removing the digit from the lines, as well.
+     * Has the side effect of removing the digit from the lines, as well as returning the
+     * digit.
      */
     public static String nextDisplayDigit(List<String> lines) {
         StringBuffer buf = new StringBuffer();
@@ -109,7 +108,7 @@ public class BankOCR {
         return buf.toString();
     }
 
-    public static int intFor(String display) {
+    public static int toInt(String display) {
         switch (display) { 
             case ZERO: return 0;
             case ONE: return 1;
@@ -124,6 +123,4 @@ public class BankOCR {
         }
         throw new IllegalArgumentException();
     }
-
-
 }

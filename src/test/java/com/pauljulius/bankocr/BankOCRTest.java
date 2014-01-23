@@ -43,7 +43,7 @@ public class BankOCRTest {
         String line2 = "| || || || || || || || || |";
         String line3 = "|_||_||_||_||_||_||_||_||_|";
         String line4 = "";
-        assertEquals("000000000", BankOCR.convert(asList(line1, line2, line3, line4)));
+        assertEquals("000000000", BankOCR.parseAccount(asList(line1, line2, line3, line4)));
     }
 
     @Test
@@ -52,7 +52,7 @@ public class BankOCRTest {
         String line2 = "  |  |  |  |  |  |  |  |  |";
         String line3 = "  |  |  |  |  |  |  |  |  |";
         String line4 = "";
-        assertEquals("111111111", BankOCR.convert(asList(line1, line2, line3, line4)));
+        assertEquals("111111111", BankOCR.parseAccount(asList(line1, line2, line3, line4)));
     }
     
     @Test
@@ -80,7 +80,7 @@ public class BankOCRTest {
         String display = " _ " +
                          "| |" +
                          "|_|";
-        assertEquals(0, BankOCR.intFor(display));
+        assertEquals(0, BankOCR.toInt(display));
     }
     
     @Test
@@ -88,7 +88,7 @@ public class BankOCRTest {
         String display = "   " +
                          "  |" +
                          "  |";
-        assertEquals(1, BankOCR.intFor(display));
+        assertEquals(1, BankOCR.toInt(display));
     }
     
     @Test
@@ -96,7 +96,7 @@ public class BankOCRTest {
         String display = " _ " +
                          " _|" +
                          "|_ ";
-        assertEquals(2, BankOCR.intFor(display));
+        assertEquals(2, BankOCR.toInt(display));
     }
     
     @Test
@@ -104,7 +104,7 @@ public class BankOCRTest {
         String display = " _ " +
                          " _|" +
                          " _|";
-        assertEquals(3, BankOCR.intFor(display));
+        assertEquals(3, BankOCR.toInt(display));
     }
     
     @Test
@@ -112,7 +112,7 @@ public class BankOCRTest {
         String display = "   " +
                          "|_|" +
                          "  |";
-        assertEquals(4, BankOCR.intFor(display));
+        assertEquals(4, BankOCR.toInt(display));
     }
     
     @Test
@@ -120,7 +120,7 @@ public class BankOCRTest {
         String display = " _ " +
                          "|_ " +
                          " _|";
-        assertEquals(5, BankOCR.intFor(display));
+        assertEquals(5, BankOCR.toInt(display));
     }
     
     @Test
@@ -128,7 +128,7 @@ public class BankOCRTest {
         String display = " _ " +
                          "|_ " +
                          "|_|";
-        assertEquals(6, BankOCR.intFor(display));
+        assertEquals(6, BankOCR.toInt(display));
     }
     
     @Test
@@ -136,7 +136,7 @@ public class BankOCRTest {
         String display = " _ " +
                          "  |" +
                          "  |";
-        assertEquals(7, BankOCR.intFor(display));
+        assertEquals(7, BankOCR.toInt(display));
     }
     
     @Test
@@ -144,7 +144,7 @@ public class BankOCRTest {
         String display = " _ " +
                          "|_|" +
                          "|_|";
-        assertEquals(8, BankOCR.intFor(display));
+        assertEquals(8, BankOCR.toInt(display));
     }
     
     @Test
@@ -152,7 +152,21 @@ public class BankOCRTest {
         String display = " _ " +
                          "|_|" +
                          " _|";
-        assertEquals(9, BankOCR.intFor(display));
+        assertEquals(9, BankOCR.toInt(display));
+    }
+    
+    @Test (expected=IllegalArgumentException.class)
+    public void should_bomb_when_empty_display_digit() {
+        BankOCR.toInt("");
+    }
+    
+    @Test (expected=IllegalArgumentException.class)
+    public void should_bomb_when_invalid_display_digit() {
+        String display = 
+                " _ " +
+                "|_|" +
+                " _ ";
+        BankOCR.toInt(display);
     }
     
     private List<String> asList(String...lines) {
