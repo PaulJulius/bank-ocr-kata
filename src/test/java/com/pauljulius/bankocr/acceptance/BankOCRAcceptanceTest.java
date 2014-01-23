@@ -1,19 +1,44 @@
 package com.pauljulius.bankocr.acceptance;
 
+import static org.junit.Assert.*;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
+import org.junit.Test;
+
+import com.pauljulius.bankocr.BankOCR;
+
 
 public class BankOCRAcceptanceTest {
 	
-//	@Test
-//    public void should_accept_story_one() throws IOException {
-//        InputStream foo = this.getClass().getResourceAsStream(
-//                "/Story_1_Acceptance_Test_Data.txt");
-//        LineNumberReader reader = new LineNumberReader(new InputStreamReader(
-//                foo));
-//        List<AccountNumber> numbers = BankOCR.read(reader);
-//        assertNotNull("Should never be null.", numbers);
-//        assertEquals("The test file should contain 11 entries", 11,
-//                numbers.size());
-//    }
+	@Test
+    public void should_accept_story_one() throws IOException {
+	    
+	    InputStream foo = this.getClass().getResourceAsStream(
+                "/Story_1_Acceptance_Test_Data.txt");
+        LineNumberReader reader = new LineNumberReader(new InputStreamReader(
+                foo));
+        StringWriter out = new StringWriter();
+        BankOCR.process(reader, new PrintWriter(out));
+        assertEquals(
+                "000000000\n" +
+                "111111111\n" +
+                "222222222\n" +
+                "333333333\n" +
+                "444444444\n" +
+                "555555555\n" +
+                "666666666\n" +
+                "777777777\n" +
+                "888888888\n" +
+                "999999999\n" +
+                "123456789\n",
+                out.getBuffer().toString());
+    }
 	
 //	@Test
 //    public void should_accept_story_three() throws IOException {
